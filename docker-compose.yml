@@ -1,0 +1,78 @@
+version: '2'
+services:
+  nginx:
+      build:
+        context: .
+        dockerfile: ./docker-config/nginx/Dockerfile
+      ports:
+          - 80:80
+      volumes:
+          - cpresources:/var/www/html/web/cpresources
+          - ./src/web:/var/www/html/web
+
+  php:
+      build:
+        context: .
+        dockerfile: ./docker-config/php/Dockerfile
+      expose:
+          - 9000
+      volumes:
+          - cpresources:/var/www/html/web/cpresources
+          - ./src/composer.json:/var/www/html/composer.json
+          - ./src/.env:/var/www/html/.env
+          - ./src/composer.lock:/var/www/html/composer.lock
+          - ./src/config:/var/www/html/config
+          - ./src/modules:/var/www/html/modules
+          - ./src/templates:/var/www/html/templates
+          - ./src/web:/var/www/html/web
+      environment:
+        ENVIRONMENT: dev
+        DB_DRIVER: mysql
+        DB_SERVER: database
+        DB_USER: fondationcartier_user
+        DB_PASSWORD: secret
+        DB_DATABASE: fondationcartier
+        DB_SCHEMA: public
+        DB_TABLE_PREFIX: craft_
+        SITE_URL: http://fondationcartier.loc
+        SECURITY_KEY: jAFaPa_8LnklQgcZUtWoKPf8aG0Trs_G
+
+  database:
+      image: mariadb:10.3
+      volumes:
+          - db:/var/lib/mysql
+      ports:
+          - 3306:3306
+      environment:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: fondationcartier
+          MYSQL_USER: fondationcartier_user
+          MYSQL_PASSWORD: secret
+
+  pma:
+      image: phpmyadmin/phpmyadmin
+      ports:
+          - 1111:80
+      environment:
+          PMA_HOST: database
+
+  webpack:
+      image: node:10-alpine
+      working_dir: /app
+      volumes:
+        - ./src/webpack.config.js:/app/webpack.config.js
+        - ./src/package.json:/app/package.json
+        - ./src/.babelrc:/app/.babelrc
+        - ./src/.eslintrc:/app/.eslintrc
+        - ./src/postcss.config.js:/app/postcss.config.js
+        - ./src/package-lock.json:/app/package-lock.json
+        - ./src/node_modules:/app/node_modules
+        - ./src/web:/app/web:rw
+      expose:
+        - 8080
+      command: sh -c 'npm install && npm run watch'
+
+volumes:
+  db:
+  cpresources:
+  node_modules:
