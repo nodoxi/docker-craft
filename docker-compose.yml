@@ -19,23 +19,13 @@ services:
       volumes:
           - cpresources:/var/www/html/web/cpresources
           - ./src/composer.json:/var/www/html/composer.json
-          - ./src/.env:/var/www/html/.env
           - ./src/composer.lock:/var/www/html/composer.lock
           - ./src/config:/var/www/html/config
           - ./src/modules:/var/www/html/modules
           - ./src/templates:/var/www/html/templates
           - ./src/web:/var/www/html/web
-      environment:
-        ENVIRONMENT: dev
-        DB_DRIVER: mysql
-        DB_SERVER: database
-        DB_USER: fondationcartier_user
-        DB_PASSWORD: secret
-        DB_DATABASE: fondationcartier
-        DB_SCHEMA: public
-        DB_TABLE_PREFIX: craft_
-        SITE_URL: http://fondationcartier.loc
-        SECURITY_KEY: jAFaPa_8LnklQgcZUtWoKPf8aG0Trs_G
+      env_file:
+          - ./src/.env
 
   database:
       image: mariadb:10.3
