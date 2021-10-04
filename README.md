@@ -6,3 +6,4 @@ Init project
 
 1. Update DB_USER, DB_PASSWORD, MYSQL_DATABASE, MYSQL_USER, SITE_URL in docker-compose.yml
 2. Add sitename to hosts file
+3. Import dump on 1111

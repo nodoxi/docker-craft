@@ -1,2 +1,3 @@
 # Ignore actual project in src folder
+src
 src/*
