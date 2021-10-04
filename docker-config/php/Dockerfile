@@ -1,6 +1,7 @@
 FROM php:7.4-fpm
 
 RUN apt-get update && apt-get install -y \
+        libonig-dev \
         libfreetype6-dev libjpeg62-turbo-dev \
         libpng-dev libbz2-dev \
         libssl-dev autoconf \
