@@ -33,7 +33,6 @@ COPY --chown=www-data:www-data ./src /var/www/html
 
 WORKDIR /var/www/html/
 
-RUN cp /var/www/html/config/.env /var/www/html
 RUN COMPOSER_VENDOR_DIR="/srv/vendor" composer install
 RUN composer install
 RUN chown -R www-data:www-data /var/www/html/composer.lock
