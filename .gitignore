@@ -1,4 +1,5 @@
 # Ignore actual project in src folder
 src
 src/*
-import/*
+db/*.sql
+db/*.zip
