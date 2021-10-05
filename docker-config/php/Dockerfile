@@ -29,10 +29,7 @@ RUN echo "upload_max_filesize = 128M" > /usr/local/etc/php/php.ini && \
     echo "max_execution_time = 300" >> /usr/local/etc/php/php.ini && \
     echo "memory_limit = 256M" >> /usr/local/etc/php/php.ini
 
-COPY --chown=www-data:www-data ./src /var/www/html
-
 WORKDIR /var/www/html/
 
-RUN COMPOSER_VENDOR_DIR="/srv/vendor" composer install
 RUN composer install
 RUN chown -R www-data:www-data /var/www/html/composer.lock
