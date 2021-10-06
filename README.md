@@ -24,6 +24,9 @@ git clone [repo] src
 
 ## 4. Import dump on 1111
 > http://localhost:1111
+docker exec -it [container_id] /bin/bash
+cd /var/import
+mysql -u fondationcartier_user -p fondationcartier < db.sql
 
 ## 5. Create .env file
 

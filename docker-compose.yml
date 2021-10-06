@@ -6,6 +6,7 @@ services:
         dockerfile: ./docker-config/nginx/Dockerfile
       ports:
           - 80:80
+          - 443:443
       volumes:
           - cpresources:/var/www/html/web/cpresources
           - ./src/web:/var/www/html/web
@@ -18,10 +19,14 @@ services:
           - 9000
       volumes:
           - cpresources:/var/www/html/web/cpresources
+          - ./src/config:/var/www/html/config
           - ./src/templates:/var/www/html/templates
           - ./src/web:/var/www/html/web
       env_file:
           - ./src/.env
+      environment:
+          PMA_HOST: database
+          DB_SERVER: database
 
   database:
       image: mariadb:10.3
