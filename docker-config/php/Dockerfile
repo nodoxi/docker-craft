@@ -28,3 +28,4 @@ RUN echo "upload_max_filesize = 128M" > /usr/local/etc/php/php.ini && \
     echo "memory_limit = 256M" >> /usr/local/etc/php/php.ini
 
 COPY --chown=www-data:www-data ./src /var/www/html
+RUN chmod -R 777 /var/www/html
