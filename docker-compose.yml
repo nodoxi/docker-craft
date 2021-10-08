@@ -59,7 +59,7 @@ services:
           CHOKIDAR_USEPOLLING: 1
       expose:
         - 8080
-      command: sh -c 'npm install && npm run bot-dev'
+      command: sh -c 'npm install && npm run eshop-dev'
 
 volumes:
   db:
