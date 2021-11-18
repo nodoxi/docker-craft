@@ -27,5 +27,9 @@ RUN echo "upload_max_filesize = 128M" > /usr/local/etc/php/php.ini && \
     echo "max_execution_time = 300" >> /usr/local/etc/php/php.ini && \
     echo "memory_limit = 256M" >> /usr/local/etc/php/php.ini
 
-COPY --chown=www-data:www-data ./src /var/www/html
-RUN chmod -R 777 /var/www/html
+COPY --chown=www-data:www-data --chmod=777 ./src /var/www/html
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+WORKDIR /var/www/html
+RUN composer update
+RUN composer install
