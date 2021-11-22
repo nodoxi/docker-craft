@@ -19,7 +19,6 @@ services:
           - 9000
       volumes:
           - cpresources:/var/www/html/web/cpresources
-          - ./src/config:/var/www/html/config
           - ./src/templates:/var/www/html/templates
           - ./src/modules:/var/www/html/modules
           - ./src/web:/var/www/html/web
