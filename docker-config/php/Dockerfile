@@ -12,15 +12,13 @@ RUN apt-get update && apt-get install -y \
         && \
         docker-php-ext-install \
         bcmath bz2 exif \
-        ftp gd gettext mbstring opcache \
+        ftp gd gettext mbstring opcache soap \
         shmop sockets sysvmsg sysvsem sysvshm \
         zip iconv pdo_mysql intl \
         && \
         docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
         && \
         docker-php-ext-enable imagick
-
-RUN docker-php-ext-install soap
 
 RUN echo "upload_max_filesize = 128M" > /usr/local/etc/php/php.ini && \
     echo "post_max_size = 128M" >> /usr/local/etc/php/php.ini && \
@@ -31,5 +29,3 @@ COPY --chown=www-data:www-data --chmod=777 ./src /var/www/html
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /var/www/html
-RUN composer update
-RUN composer install
