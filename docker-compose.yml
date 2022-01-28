@@ -21,6 +21,9 @@ services:
           - cpresources:/var/www/html/web/cpresources
           - ./src/templates:/var/www/html/templates
           - ./src/modules:/var/www/html/modules
+          - ./src/config/ovp:/var/www/html/config/ovp
+          - ./src/storage/ovp:/var/www/html/storage/ovp
+          - ./src/translations:/var/www/html/translations
           - ./src/web:/var/www/html/web
       env_file:
           - ./src/.env
