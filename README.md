@@ -3,7 +3,8 @@ Simple Docker Compose config for Craft CMS
 Nginx, Mariadb, Webpack
 
 # Setup
-Place db_dump.sql into /db folder  
+Place Craft CMS to /src
+Place db_dump.sql into /db
 Add {sitename}.loc to hosts file  
 `{sitename}.loc`
 
