@@ -1,0 +1,6 @@
+# Ignore actual project in src folder
+src
+src/*
+db/*.sql
+db/*.zip
+db/*.dump
